@@ -1,17 +1,12 @@
 const express = require('express');
-const transactionRoute = require('./transaction.routes');
+const authRoutes = require('./auth.routes');
+const transactionRoutes = require('./transaction.routes');
+const syncRoutes = require('./sync.routes');
 
 const router = express.Router();
 
-const defaultRoutes = [
-  {
-    path: '/transactions',
-    route: transactionRoute,
-  },
-];
-
-defaultRoutes.forEach((route) => {
-  router.use(route.path, route.route);
-});
+router.use('/auth', authRoutes);
+router.use('/transactions', transactionRoutes); // Kept for legacy compatibility if needed
+router.use('/sync', syncRoutes);
 
 module.exports = router;

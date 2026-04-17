@@ -1,0 +1,13 @@
+{
+  "user": { "id": 1, "name": "Ahmad", "business_name": "Toko Ahmad" },
+  "cash_pools": [
+    { "id": 1, "name": "Kas Toko", "is_business": true, "balance": 1500000, "last_activity": "2023-11-01" },
+    { "id": 2, "name": "Rekening Pribadi", "is_business": false, "balance": 5000000, "last_activity": "2023-10-25" }
+  ],
+  "transactions": [
+    { "id": 101, "date": "2023-11-01", "type": "INCOME", "category": "Penjualan", "amount": 500000, "notes": "Jual 10 kopi", "cash_pool_id": 1, "pool_name": "Kas Toko" },
+    { "id": 102, "date": "2023-11-02", "type": "EXPENSE", "category": "Bahan Baku", "amount": 100000, "notes": "Beli gula batu", "cash_pool_id": 1, "pool_name": "Kas Toko" },
+    { "id": 103, "date": "2023-11-03", "type": "TRANSFER", "category": "Pribadi", "amount": 200000, "notes": "Tarik tunai dari toko", "cash_pool_id": 1, "related_pool_id": 2, "pool_name": "Kas Toko" }
+  ],
+  "summary": { "revenue": 500000, "expense": 100000, "net": 400000 }
+}

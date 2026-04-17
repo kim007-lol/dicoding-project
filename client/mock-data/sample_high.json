@@ -1,0 +1,18 @@
+{
+  "user": { "id": 1, "name": "Ahmad", "business_name": "Kopi Mapan" },
+  "cash_pools": [
+    { "id": 1, "name": "Kas Toko (Laci)", "is_business": true, "balance": 2500000, "last_activity": "2023-11-15T18:00:00Z" },
+    { "id": 2, "name": "Rekening BCA Usaha", "is_business": true, "balance": 15000000, "last_activity": "2023-11-15T12:00:00Z" },
+    { "id": 3, "name": "Rekening Pribadi", "is_business": false, "balance": 8500000, "last_activity": "2023-11-10T10:00:00Z" }
+  ],
+  "transactions": [
+    { "id": 201, "date": "2023-11-15", "type": "INCOME", "category": "Penjualan", "amount": 1500000, "notes": "Omset shift pagi & sore", "cash_pool_id": 1, "pool_name": "Kas Toko (Laci)" },
+    { "id": 202, "date": "2023-11-15", "type": "EXPENSE", "category": "Bahan Baku", "amount": 300000, "notes": "Beli es batu & susu", "cash_pool_id": 1, "pool_name": "Kas Toko (Laci)" },
+    { "id": 203, "date": "2023-11-14", "type": "TRANSFER", "category": "Operasional", "amount": 5000000, "notes": "Setor tunai laci ke bank", "cash_pool_id": 1, "related_pool_id": 2, "pool_name": "Kas Toko (Laci) -> Rek BCA" },
+    { "id": 204, "date": "2023-11-14", "type": "EXPENSE", "category": "Listrik/Air", "amount": 850000, "notes": "Token & PDAM bulan ini", "cash_pool_id": 2, "pool_name": "Rekening BCA Usaha" },
+    { "id": 205, "date": "2023-11-13", "type": "INCOME", "category": "Penjualan", "amount": 2100000, "notes": "Omset weekend", "cash_pool_id": 1, "pool_name": "Kas Toko (Laci)" },
+    { "id": 206, "date": "2023-11-12", "type": "EXPENSE", "category": "Gaji Pegawai", "amount": 3000000, "notes": "Gaji 2 barista", "cash_pool_id": 2, "pool_name": "Rekening BCA Usaha" },
+    { "id": 207, "date": "2023-11-10", "type": "TRANSFER", "category": "Pribadi", "amount": 1500000, "notes": "Ambil laba untuk pribadi", "cash_pool_id": 2, "related_pool_id": 3, "pool_name": "Rek BCA -> Pribadi" }
+  ],
+  "summary": { "revenue": 18500000, "expense": 11500000, "net": 7000000 }
+}

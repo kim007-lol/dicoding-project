@@ -1,0 +1,6 @@
+tanggal,tipe,jumlah,kategori,keterangan,pool_asal,pool_tujuan
+2023-11-01,INCOME,500000,Penjualan,Laris manis hari ini,Kas Toko,
+2023-11-02,EXPENSE,150000,Bahan Baku,Beli biji kopi,Kas Toko,
+2023-11-03,TRANSFER,200000,Pribadi,Tarik laba,Kas Toko,Rekening Pribadi
+2023-11-04,INCOME,750000,Penjualan,Pemesanan katering,Kas Toko,
+2023-11-05,EXPENSE,50000,Utilitas,Bayar listrik,Kas Toko,

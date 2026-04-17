@@ -1,0 +1,6 @@
+{
+  "user": { "id": 1, "name": "Ahmad", "business_name": "Toko Ahmad" },
+  "cash_pools": [],
+  "transactions": [],
+  "summary": { "revenue": 0, "expense": 0, "net": 0 }
+}

@@ -1,125 +1,86 @@
-# KasTumbuh - Aplikasi Pencatatan Keuangan UMKM Berbasis SAK EMKM
+# 📈 KasTumbuh
 
-Selamat datang di repositori proyek **KasTumbuh**! Proyek ini bertujuan untuk membangun _Minimum Viable Product_ (MVP) aplikasi manajemen keuangan yang dikhususkan untuk Usaha Mikro Kecil dan Menengah (UMKM).
-
-Aplikasi ini menggunakan arsitektur **Full-Stack** dengan pemisahan lingkup kerja yang tegas antara _Front-End_ dan _Back-End_.
+KasTumbuh adalah aplikasi pencatatan keuangan modern untuk UMKM yang berfokus pada kemudahan penggunaan dan kepatuhan standar **SAK EMKM** (Standar Akuntansi Keuangan Entitas Mikro, Kecil, dan Menengah). KasTumbuh membantu pelaku usaha memisahkan keuangan pribadi dan bisnis dengan aman.
 
 ---
 
-## 📂 Struktur Repositori Terpadu (Monorepo)
+## 🚀 Fitur Unggulan
 
-Repositori ini terbagi menjadi 2 ruang kerja (_workspace_) utama. **Mohon jangan mencampuradukkan kode _Front-End_ di folder _Back-End_ dan sebaliknya.**
-
-```text
-KasTumbuh/
-├── client/          Area Tim Front-End (React.js + Vite + Tailwind)
-└── server/          Area Tim Back-End (Node.js + Express + MySQL)
-```
+- **🔐 Autentikasi JWT & Isolasi Data**: Sistem Login/Register riil. Data Anda 100% terisolasi dari pengguna lain. 
+- **💼 Manajemen Multi-Kas (Cash Pools)**: Buat berbagai "rekening" (Laci Toko, Bank, E-Wallet, Tabungan) lengkap dengan Preset Kategori & Kategori Custom.
+- **📊 Dashboard Analitik**: Pantau total aset usaha, ringkasan masuk/keluar harian, dan laba bersih bulanan dalam satu layar.
+- **💸 Pencatatan Pintar & Transfer**: Catat Pemasukan, Pengeluaran, dan Transfer Antar Kas dengan interface Slide-Over yang elegan.
+- **☁️ Cloud Auto-Sync (Real-time)**: Semua data otomatis disimpan ke *database* MySQL sesaat setelah perubahan dilakukan. Data aman meski Anda ganti peramban atau *device*.
+- **🛡️ Validasi Transaksi Tingkat Tinggi**: 
+  - *Auto-formatting* mata uang (Rupiah otomatis dengan pemisah ribuan).
+  - Validasi ketat untuk mencegah nominal 0, transfer ke akun yang sama, atau pengeluaran melebihi saldo.
+  - *Confirmation Modal* saat menghapus untuk keamanan berlapis.
 
 ---
 
-## Cara Menjalankan Proyek (Setup Guide)
+## 💻 Tech Stack
 
-Setiap anggota tim **wajib** melakukan instalasi di masing-masing lingkungan kerja sesuai divisinya. Buka terminal Anda dan ikuti langkah berikut:
+- **Frontend:** React + Vite, Tailwind CSS v4, Context API (State Management)
+- **Backend:** Node.js, Express.js, JWT (JSON Web Tokens)
+- **Database:** MySQL
+- **Tooling:** Laragon (Local Environment)
 
-### 1. Setup Backend (Tim API & Database)
+---
 
-Buka terminal dan arahkan ke folder `server`:
+## 🛠 Panduan Instalasi & Menjalankan Aplikasi
 
-```bash
-cd KasTumbuh/server
-npm install
-```
+Aplikasi ini dibagi menjadi dua bagian utama: `client` (Frontend) dan `server` (Backend).
 
-**Konfigurasi Database:**
+### 1. Persiapan Database (MySQL)
+1. Buka aplikasi **Laragon** (atau XAMPP) dan jalankan MySQL.
+2. Buat database baru bernama `kastumbuh`.
+3. Jalankan file `database_setup.sql` yang ada di dalam folder `server` untuk membuat skema tabel secara otomatis.
 
-1. Pastikan Anda telah menginstal dan menyalakan **MySQL** (misalnya melalui XAMPP/Laragon).
-2. Buka phpMyAdmin (atau konektor IDE), buat database bernama `kastumbuh`.
-3. Lakukan **Import** _file_ `server/database_setup.sql` untuk men-generate tabel-tabel utama.
-4. Sesuaikan kredensial di _file_ `.env`:
-   ```env
-   PORT=5000
-   DB_HOST=localhost
-   DB_USER=root
-   DB_PASSWORD=       # Isi jika MySQL Anda memiliki password
-   DB_NAME=kastumbuh
+### 2. Konfigurasi & Menjalankan Backend
+1. Buka terminal, masuk ke folder `server`:
+   ```bash
+   cd server
    ```
-
-**Jalankan Server Development:**
-
-```bash
-npm run dev
-# Server akan berjalan di http://localhost:5000
-```
-
-### 2. Setup Frontend (Tim UI/UX)
-
-Buka terminal baru dan arahkan ke folder `client`:
-
-```bash
-cd KasTumbuh/client
-npm install
-```
-
-**Jalankan React Vite Development:**
-
-```bash
-npm run dev
-# Web app akan bisa diakses melalui URL lokal yang diberikan Vite (biasanya http://localhost:5173)
-```
-
----
-
-## Peraturan Kebersihan Kode (Clean Code Rules)
-
-Demi mencegah konflik saat penggabungan kode (_integrasi_), kita menerapkan **Standar Senior Programmer** berikut:
-
-1. **Penamaan Berkas / Komponen (Front-End) - _PascalCase_:**
-   Seluruh berkas komponen React di `client/src/components` atau `client/src/pages` **WAJIB** diawali huruf kapital. Contoh: `TransactionCard.jsx`, `Dashboard.jsx`.
-2. **Penamaan Fungsi / Variabel - _camelCase_:**
-   Penamaan fungsi lokal, fungsi _hooks_, dan nama variabel wajib menggunakan awalan huruf kecil. Contoh: `fetchData()`, `totalIncome`.
-3. **Sentralisasi Pemanggilan API:**
-   Komponen UI **dilarang keras** melakukan `axios.get` atau `axios.post` langsung di dalam halamannya. Semua _networking calls_ WAJIB didaftarkan ke dalam folder `client/src/services`.
-4. **Respon API yang Standar (Back-End):**
-   Tim Back-End wajib selalu menggunakan struktur respons yang membungkus _data_, sehingga formatnya konsisten (_Gunakan file utils `ApiResponse.js` dan `ApiError.js` yang sudah disediakan_).
-5. **Konvensi RESTful:**
-   Nama endpoint URL harus menggunakan _kebab-case_ dan menggunakan kata jamak. (Contoh: `/api/v1/transactions` BUKAN `/api/v1/AmbilTransaksi`).
-
----
-
-## 🛠️ Teknologi & Konfigurasi Utama (Tech Stack)
-
-**Front-End:**
-
-- **React.js (Vite):** Digunakan sebagai _framework UI single-page application_ dengan waktu _build_ yang instan.
-- **Tailwind CSS:** _Utility-first CSS framework_ untuk _styling_ antarmuka responsif tanpa harus menulis banyak _file CSS_ manual.
-- **Axios:** Terpusat di `client/src/services/api.js` untuk manajemen _request/response_ HTTP serta intersepsi _token_ otentikasi.
-
-**Back-End:**
-
-- **Node.js & Express.js:** _Runtime_ dan _framework_ utama untuk _RESTful API_.
-- **MySQL (mysql2 package):** Database relasional yang dipilih karena reliabilitas tingginya dalam mengelola relasi transaksi keuangan (Tabel Users & Transactions).
-- **Morgan & Helmet:** _Middleware_ yang sudah ditanamkan untuk keamanan _header_ HTTP dasar dan _logging_ jalan API selama _development_.
-
----
-
-## 🔐 Standar Kolaborasi API (Postman)
-
-1. **Bagikan Collection:** Tim Back-End **diwajibkan** untuk melakukan _ekspor Collection Postman_ (format `.json`) dan membagikannya ke tim Front-End secepatnya agar tim Front-End bisa merancang _flow_ aplikasi lebih awal tanpa harus menunggu API 100% jadi (_mock-up data_).
-2. **Format Standar:** Pastikan setiap endpoint selalu mengembalikan format JSON yang konsisten, berkat `ApiResponse.js` dan `ApiError.js`, sehingga tim _Front-End_ selalu mendapatkan `body` data seperti ini:
-   ```json
-   {
-     "success": true,
-     "statusCode": 200,
-     "message": "Pesan sukses atau error",
-     "data": { ... }
-   }
+2. Install dependensi:
+   ```bash
+   npm install
    ```
+3. Sesuaikan konfigurasi koneksi database di `server/src/config/database.js` jika password `root` Anda berbeda.
+4. Jalankan server backend:
+   ```bash
+   npm run dev
+   ```
+   *Server akan berjalan di http://localhost:5000*
+
+### 3. Konfigurasi & Menjalankan Frontend
+1. Buka terminal baru, masuk ke folder `client`:
+   ```bash
+   cd client
+   ```
+2. Install dependensi:
+   ```bash
+   npm install
+   ```
+3. Jalankan server frontend:
+   ```bash
+   npm run dev
+   ```
+   *Aplikasi dapat diakses di http://localhost:5173*
 
 ---
 
-## Alur Pengerjaan (Git Flow)
+## 📂 Struktur Database
 
-1. Jangan pernah nge-push langsung ke _branch_ `main`.
-2. Buat _branch_ baru untuk fitur yang sedang Anda kerjakan (misal: `git checkout -b feature/login-page` atau `git checkout -b api/create-transaction`).
-3. Lakukan _Pull Request_ dan minta setidaknya 1 anggota lain untuk melakukan _Review_ sebelum di-_Merge_.
+Database `kastumbuh` terdiri dari 3 tabel utama:
+1. `users` - Menyimpan data pengguna dan profil bisnis dengan password yang di-*hash*.
+2. `cash_pools` - Menyimpan data rekening/kas yang dimiliki oleh masing-masing user, lengkap dengan tipe (`is_business`) dan tujuan/kategori (`purpose`).
+3. `transactions` - Menyimpan riwayat mutasi per user, mendukung *Income*, *Expense*, dan *Transfer*. Terdapat fitur `status = 'VOIDED'` untuk transaksi yang dibatalkan.
+
+---
+
+## 💡 Developer Notes
+- **Atomicity & Real-time Sync**: Aplikasi menggunakan logika sinkronisasi canggih di `DataContext.jsx` yang mengirimkan *state* ke Backend MySQL secara *real-time* setiap fungsi mutasi (`addPool`, `addTransaction`, `transfer`, `voidTransaction`) dipanggil. Tidak perlu lagi tombol "Sinkronisasi" manual!
+- **Idempotency**: Pembuatan ID *(timestamp+uuid)* dilakukan di *client* untuk menjamin dukungan interaksi *offline-first* di masa depan.
+
+---
+*© 2026 KasTumbuh Dev Team - Dirancang untuk UMKM Indonesia.*
